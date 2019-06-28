@@ -11,6 +11,7 @@ import UIKit
 class ViewController: UIViewController {
     
     var pickerData: [String] = []
+    var selectedUnit: String = "kilometer"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,17 +27,23 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var inputValue: UITextField!
     @IBOutlet weak var outputValue: UILabel!
+    @IBOutlet weak var outputUnit: UILabel!
     
     @IBOutlet weak var unitPicker: UIPickerView!
     
     
     @IBAction func pressedConvert(_ sender: Any) {
         
-        Convert(inputValue.text!)
-        
+        if (selectedUnit == "kilometer") {
+            ConvertKilometer(inputValue.text!)
+        }
+        else if (selectedUnit == "Euro") {
+            ConvertEuro(inputValue.text!)
+            outputUnit.text = ("Dollar")
+        }
     }
     
-    func Convert(_ input: String)  {
+    func ConvertKilometer(_ input: String)  {
         
         let output = Double(input)
         var outputUnwrapped = Double(output!)
@@ -45,7 +52,17 @@ class ViewController: UIViewController {
         outputValue.text = "\(outputUnwrapped)"
         
     }
+    func ConvertEuro(_ input: String) {
+        
+        let output = Double(input)
+        var outputUnwrapped = Double(output!)
+        
+        outputUnwrapped *= 1.14
+        outputValue.text = "\(outputUnwrapped)"
+    }
 }
+
+
 
 extension ViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
@@ -58,6 +75,10 @@ extension ViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         return pickerData[row]
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        selectedUnit = pickerData[row]
     }
 }
 

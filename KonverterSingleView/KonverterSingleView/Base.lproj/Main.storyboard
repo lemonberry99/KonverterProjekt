@@ -64,6 +64,7 @@
                     </view>
                     <connections>
                         <outlet property="inputValue" destination="zjT-w7-jwc" id="hFo-Ib-Kfd"/>
+                        <outlet property="outputUnit" destination="m9B-ob-J6I" id="xyU-Dy-Ku6"/>
                         <outlet property="outputValue" destination="Y7v-Qj-8oT" id="YGY-tG-YGN"/>
                         <outlet property="unitPicker" destination="XD1-pg-qv9" id="c0D-M0-TmV"/>
                     </connections>
